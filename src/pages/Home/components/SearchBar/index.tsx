@@ -7,7 +7,7 @@ interface SearchBarProps {
   onValueChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function SearchBar({
+export default function SearchBar({
   value,
   onValueChange,
   onSearchClick,

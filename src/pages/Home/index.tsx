@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SearchBar } from "./components/SearchBar";
+import SearchBar from "./components/SearchBar";
 
 export default function Home() {
   // create state for search value
