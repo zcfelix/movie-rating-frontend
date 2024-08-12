@@ -1,25 +1,14 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
-import MovieDetail from "./pages/MovieDetail";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {routes} from "./router";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home></Home>,
-  },
-  {
-    path: "/home",
-    element: <Home></Home>,
-  },
-  {
-    path: "/movies/:id",
-    element: <MovieDetail></MovieDetail>,
-  },
-]);
+const router = createBrowserRouter(routes.map(route => ({
+    path: route.path,
+    element: <route.element/>,
+})));
 
 function App() {
-  return <RouterProvider router={router} />;
+    return <RouterProvider router={router}/>;
 }
 
 export default App;
