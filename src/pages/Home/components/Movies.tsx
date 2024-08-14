@@ -1,19 +1,13 @@
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
-import { useNavigate } from 'react-router-dom';
-import { paths } from '@/router';
-import infoSvg from '@/assets/info.svg';
-import { Movie } from '@/types/movie';
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import infoSvg from "@/assets/info.svg";
+import { Movie } from "@/types/movie";
+import MovieDetailDialog from "@/components/MovieDetailDialog";
 
 interface MoviesProps {
     data: Movie[];
 }
 
 const Movies = ({ data }: MoviesProps) => {
-    const navigate = useNavigate();
-
-    const handleViewDetailClick = (id: number) => {
-        navigate(paths.movieDetail.replace(':id', id.toString()));
-    };
 
     return (
         <Table className="my-6">
@@ -32,13 +26,13 @@ const Movies = ({ data }: MoviesProps) => {
                             <div>9.3</div>
                         </TableCell>
                         <TableCell className="text-right w-[100px]">
-                            <div onClick={() => handleViewDetailClick(movie.id)}>
+                            <MovieDetailDialog movie={movie}>
                                 <img
                                     src={infoSvg}
                                     alt="Info"
                                     className="w-[34px] h-[34px] cursor-pointer"
                                 />
-                            </div>
+                            </MovieDetailDialog>
                         </TableCell>
                     </TableRow>
                 ))}
