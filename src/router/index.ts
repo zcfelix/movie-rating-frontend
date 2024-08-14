@@ -3,6 +3,7 @@ import MovieDetail from '../pages/MovieDetail';
 
 export const paths = {
   home: '/',
+  movies: '/movies',
   movieDetail: '/movies/:id',
 };
 
