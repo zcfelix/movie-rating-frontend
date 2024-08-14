@@ -27,7 +27,7 @@ const Movies = ({ data }: MoviesProps) => {
             </TableCell>
             <TableCell className="flex flex-col text-left">
               <div className="text-lg font-bold">{movie.title}</div>
-              <div>9.3</div>
+              <div>{movie.averageRating}</div>
             </TableCell>
             <TableCell className="text-right w-[100px]">
               <MovieDetailDialog movie={movie}>
