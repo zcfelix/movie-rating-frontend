@@ -4,7 +4,7 @@ import { fetchMovies } from '../../api';
 import MovieContext from '../../context/movies';
 import Movies from './components/Movies';
 import { Movie } from '../../types/movie';
-import Navigates from '../Home/components/Navigates';
+import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
 
 export default function Home() {

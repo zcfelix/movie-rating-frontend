@@ -1,5 +1,5 @@
-import { Movie } from '../../../types/movie.ts';
-import MovieContext from '../../../context/movies.ts';
+import { Movie } from '../../types/movie.ts';
+import MovieContext from '../../context/movies.ts';
 import { useContext } from 'react';
 import {
   Dialog,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../../components/ui/dialog.tsx';
+} from '../ui/dialog.tsx';
 
 const RatingDialog = ({ movie }: { movie: Movie }) => {
   const { changeMovies } = useContext(MovieContext);

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { paths } from '../../../router';
+import { paths } from '../../router';
 
 const Navigates = ({ currentNav }: { currentNav: string }) => {
   const navigate = useNavigate();

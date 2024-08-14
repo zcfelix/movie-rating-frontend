@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Movie } from '../../types/movie';
 import { fetchMovies } from '../../api';
-import Navigates from '../Home/components/Navigates';
+import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
 import moviePlaceholder from '../../assets/movie_placeholder.jpg';
 

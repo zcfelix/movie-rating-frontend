@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../../components/ui/dialog';
-import { Movie } from '../../../types/movie';
+} from '../ui/dialog.tsx';
+import { Movie } from '../../types/movie.ts';
 import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 import RatingDialog from './RatingDialog.tsx';
 

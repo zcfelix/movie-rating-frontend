@@ -5,7 +5,7 @@ import {
   TableRow,
 } from '../../../components/ui/table';
 import infoSvg from '@/assets/info.svg';
-import MovieDetailDialog from './MovieDetailDialog';
+import MovieDetailDialog from '../../../components/common/MovieDetailDialog.tsx';
 import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 import MovieContext from '../../../context/movies';
 import { useContext } from 'react';
