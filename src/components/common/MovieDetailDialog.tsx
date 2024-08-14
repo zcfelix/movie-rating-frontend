@@ -7,8 +7,8 @@ import {
   DialogTrigger,
 } from '../ui/dialog.tsx';
 import { Movie } from '../../types/movie.ts';
-import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 import RatingDialog from './RatingDialog.tsx';
+import MovieImg from './MovieImg.tsx';
 
 const MovieDetailDialog = ({
   children,
@@ -23,15 +23,7 @@ const MovieDetailDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex gap-4">
-            <img
-              src={movie.posterUrl}
-              alt="Movie Poster"
-              className="w-[80px] h-[120px] object-cover"
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = moviePlaceHolder;
-              }}
-            />
+            <MovieImg url={movie.posterUrl} className="w-[80px] h-[120px]" />
             <div>
               <div>{movie.title}</div>
               <div className="flex">

@@ -6,9 +6,9 @@ import {
 } from '../../../components/ui/table';
 import infoSvg from '@/assets/info.svg';
 import MovieDetailDialog from '../../../components/common/MovieDetailDialog.tsx';
-import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 import MovieContext from '../../../context/movies';
 import { useContext } from 'react';
+import MovieImg from '../../../components/common/MovieImg.tsx';
 
 const Movies = () => {
   const { movies } = useContext(MovieContext);
@@ -18,15 +18,7 @@ const Movies = () => {
         {movies.map((movie) => (
           <TableRow key={movie.id}>
             <TableCell className="font-medium w-[100px]">
-              <img
-                src={movie.posterUrl}
-                alt="Movie poster"
-                className="w-[100px] h-[150px] object-cover"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = moviePlaceHolder;
-                }}
-              />
+              <MovieImg url={movie.posterUrl} className="w-[100px]" />
             </TableCell>
             <TableCell className="flex flex-col text-left">
               <div className="text-lg font-bold">{movie.title}</div>

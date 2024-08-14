@@ -3,7 +3,7 @@ import { Movie } from '../../types/movie';
 import { fetchMovies } from '../../api';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
-import moviePlaceholder from '../../assets/movie_placeholder.jpg';
+import MovieImg from '../../components/common/MovieImg.tsx';
 
 const Movies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -24,14 +24,7 @@ const Movies = () => {
             key={movie.id}
             className="w-[200px] h-[150px] flex cursor-pointer bg-gray-300 rounded-md overflow-hidden"
           >
-            <img
-              src={movie.posterUrl}
-              alt={movie.title}
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = moviePlaceholder;
-              }}
-            />
+            <MovieImg url={movie.posterUrl} />
             <div className="flex-1">
               <h2 className="text-left pl-1 font-bold break-words break-all">
                 {movie.title}
