@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import infoSvg from '@/assets/info.svg';
 import { Movie } from '@/types/movie';
 import MovieDetailDialog from './MovieDetailDialog';
+import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 
 interface MoviesProps {
   data: Movie[];
@@ -18,6 +19,10 @@ const Movies = ({ data }: MoviesProps) => {
                 src={movie.posterUrl}
                 alt="Movie poster"
                 className="w-[100px] h-[150px] object-cover"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = moviePlaceHolder;
+                }}
               />
             </TableCell>
             <TableCell className="flex flex-col text-left">
@@ -29,6 +34,7 @@ const Movies = ({ data }: MoviesProps) => {
                 <img
                   src={infoSvg}
                   alt="Info"
+                  title="View Details"
                   className="w-[34px] h-[34px] cursor-pointer"
                 />
               </MovieDetailDialog>

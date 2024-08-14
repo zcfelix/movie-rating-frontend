@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Movie } from '@/types/movie';
+import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 
 const MovieDetailDialog = ({
   children,
@@ -25,10 +26,14 @@ const MovieDetailDialog = ({
               src={movie.posterUrl}
               alt="Movie Poster"
               className="w-[80px] h-[120px] object-cover"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = moviePlaceHolder;
+              }}
             />
             <div>
               <div>{movie.title}</div>
-              <div className="m-1">9.3</div>
+              <div className="m-1">{movie.averageRating}</div>
             </div>
           </DialogTitle>
           <DialogDescription>
