@@ -11,6 +11,11 @@ export interface Movie {
 
 export interface FetchMoviesPayload {
   searchCriteria: string;
-  page: number;
-  size: number;
+  pageNumber: number;
+  pageSize: number;
+}
+
+export interface RatingMoviePayload {
+  movieId: number;
+  score: number;
 }

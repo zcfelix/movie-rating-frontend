@@ -10,7 +10,11 @@ const Movies = () => {
   const location = useLocation();
 
   useEffect(() => {
-    fetchMovies().then((data) => {
+    fetchMovies({
+      pageNumber: 1,
+      pageSize: 200,
+      searchCriteria: '',
+    }).then((data) => {
       setMovies(data.contents);
     });
   }, []);

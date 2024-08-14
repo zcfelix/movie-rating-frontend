@@ -10,17 +10,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog.tsx';
+import { ratingMovie } from '../../api';
 
 const RatingDialog = ({ movie }: { movie: Movie }) => {
   const { changeMovies } = useContext(MovieContext);
 
   const handleScoreClick = (score: number) => {
-    if (changeMovies) {
-      changeMovies({
-        ...movie,
-        averageRating: score.toString(), // TODO: change to real average rating from http response
-      });
-    }
+    ratingMovie({ movieId: movie.id, score }).then((data) => {
+      if (changeMovies) {
+        changeMovies({
+          ...movie,
+          averageRating: data.averageRating,
+        });
+      }
+    });
   };
 
   const scoreList = Array.from({ length: 10 }, (_, i) => i + 1);

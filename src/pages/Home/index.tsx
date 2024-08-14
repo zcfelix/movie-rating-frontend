@@ -3,23 +3,43 @@ import SearchBar from './components/SearchBar';
 import { fetchMovies } from '../../api';
 import MovieContext from '../../context/movies';
 import Movies from './components/Movies';
-import { Movie } from '../../types/movie';
+import { FetchMoviesPayload, Movie } from '../../types/movie';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
+import MoviePagination from './components/MoviePagination.tsx';
+
+const PAGE_SIZE = 20;
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalSize, setTotalSize] = useState(0);
   const [movies, setMovies] = useState<Movie[]>([]);
   const location = useLocation();
 
-  useEffect(() => {
-    fetchMovies().then((data) => {
+  const totalPages = Math.ceil(totalSize / PAGE_SIZE);
+
+  const getMovies = (payload: FetchMoviesPayload) => {
+    fetchMovies(payload).then((data) => {
       setMovies(data.contents);
+      setTotalSize(data.totalSize);
+    });
+  };
+
+  useEffect(() => {
+    getMovies({
+      pageNumber: pageNumber,
+      pageSize: PAGE_SIZE,
+      searchCriteria: searchValue,
     });
   }, []);
 
   const handleSearchClick = () => {
-    console.log('search value: ', searchValue);
+    getMovies({
+      pageNumber: pageNumber,
+      pageSize: PAGE_SIZE,
+      searchCriteria: searchValue,
+    });
   };
 
   const changeMovies = (currentMovie: Movie) => {
@@ -33,6 +53,15 @@ export default function Home() {
     setSearchValue(e.target.value);
   };
 
+  const handlePageNumberChange = (value: number) => {
+    setPageNumber(value);
+    getMovies({
+      pageNumber: value,
+      pageSize: PAGE_SIZE,
+      searchCriteria: searchValue,
+    });
+  };
+
   return (
     <div>
       <Navigates currentNav={location.pathname} />
@@ -43,6 +72,13 @@ export default function Home() {
           onSearchClick={handleSearchClick}
         />
         <Movies />
+        {totalPages > 1 && (
+          <MoviePagination
+            pageNumber={pageNumber}
+            totalPages={totalPages}
+            onPageNumberChange={handlePageNumberChange}
+          />
+        )}
       </MovieContext.Provider>
     </div>
   );
