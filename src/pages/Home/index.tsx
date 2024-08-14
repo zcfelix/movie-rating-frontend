@@ -4,10 +4,13 @@ import { fetchMovies } from '../../api';
 import MovieContext from '../../context/movies';
 import Movies from './components/Movies';
 import { Movie } from '../../types/movie';
+import Navigates from '../Home/components/Navigates';
+import { useLocation } from 'react-router-dom';
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [movies, setMovies] = useState<Movie[]>([]);
+  const location = useLocation();
 
   useEffect(() => {
     fetchMovies().then((data) => {
@@ -32,7 +35,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Home</h1>
+      <Navigates currentNav={location.pathname} />
       <MovieContext.Provider value={{ movies, changeMovies }}>
         <SearchBar
           value={searchValue}
