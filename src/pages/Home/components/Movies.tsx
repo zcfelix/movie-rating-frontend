@@ -2,16 +2,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '@/router';
 import infoSvg from '@/assets/info.svg';
-
-interface Movie {
-    id: number;
-    title: string;
-    runtime: number;
-    posterUrl: string;
-    plot: string;
-    director: string;
-    actors: string;
-}
+import { Movie } from '@/types/movie';
 
 interface MoviesProps {
     data: Movie[];
