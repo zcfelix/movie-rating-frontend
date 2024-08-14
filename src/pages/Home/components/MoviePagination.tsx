@@ -35,13 +35,7 @@ const MoviePagination = ({
     }
     const nextPageNumber = pageNumber + 1;
     onPageNumberChange(nextPageNumber);
-    if (totalPages >= DEFAULT_ITEMS_SIZE + nextPageNumber - 2) {
-      setDisplayPaginationItems(
-        nextPageNumber + 2 > totalPages
-          ? [nextPageNumber, nextPageNumber + 1]
-          : [nextPageNumber, nextPageNumber + 1, nextPageNumber + 2],
-      );
-    }
+    updateDisplayPaginationItems(nextPageNumber);
   };
 
   const handlePreviousClick = () => {
@@ -63,13 +57,18 @@ const MoviePagination = ({
   const handlePageNumberClick = (value: number) => {
     onPageNumberChange(value);
     if (value === displayPaginationItems[lastDisplayPaginationItemIndex]) {
-      if (totalPages >= DEFAULT_ITEMS_SIZE + value - 2) {
-        setDisplayPaginationItems(
-          value + 2 > totalPages
-            ? [value, value + 1]
-            : [value, value + 1, value + 2],
-        );
-      }
+      updateDisplayPaginationItems(value);
+    }
+  };
+
+  const updateDisplayPaginationItems = (value: number) => {
+    const remainingPages = totalPages - value;
+    if (remainingPages > 0) {
+      setDisplayPaginationItems(
+        remainingPages == 1
+          ? [value, value + 1]
+          : [value, value + 1, value + 2],
+      );
     }
   };
 
