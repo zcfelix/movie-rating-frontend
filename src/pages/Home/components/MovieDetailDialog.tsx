@@ -8,6 +8,7 @@ import {
 } from '../../../components/ui/dialog';
 import { Movie } from '../../../types/movie';
 import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
+import RatingDialog from './RatingDialog.tsx';
 
 const MovieDetailDialog = ({
   children,
@@ -33,7 +34,10 @@ const MovieDetailDialog = ({
             />
             <div>
               <div>{movie.title}</div>
-              <div className="m-1">{movie.averageRating}</div>
+              <div className="flex">
+                <div className="m-1">{movie.averageRating}</div>
+                <RatingDialog movie={movie} />
+              </div>
             </div>
           </DialogTitle>
           <DialogDescription>
