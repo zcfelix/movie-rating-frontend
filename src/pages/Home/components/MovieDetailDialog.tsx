@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Movie } from '@/types/movie';
+} from '../../../components/ui/dialog';
+import { Movie } from '../../../types/movie';
 import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
 
 const MovieDetailDialog = ({

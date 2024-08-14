@@ -1,18 +1,21 @@
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '../../../components/ui/table';
 import infoSvg from '@/assets/info.svg';
-import { Movie } from '@/types/movie';
 import MovieDetailDialog from './MovieDetailDialog';
 import moviePlaceHolder from '@/assets/movie_placeholder.jpg';
+import MovieContext from '../../../context/movies';
+import { useContext } from 'react';
 
-interface MoviesProps {
-  data: Movie[];
-}
-
-const Movies = ({ data }: MoviesProps) => {
+const Movies = () => {
+  const { movies } = useContext(MovieContext);
   return (
     <Table className="my-6">
       <TableBody>
-        {data.map((movie) => (
+        {movies.map((movie) => (
           <TableRow key={movie.id}>
             <TableCell className="font-medium w-[100px]">
               <img
