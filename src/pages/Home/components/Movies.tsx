@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import infoSvg from '@/assets/info.svg';
 import { Movie } from '@/types/movie';
-import MovieDetailDialog from '@/components/MovieDetailDialog';
+import MovieDetailDialog from './MovieDetailDialog';
 
 interface MoviesProps {
   data: Movie[];
