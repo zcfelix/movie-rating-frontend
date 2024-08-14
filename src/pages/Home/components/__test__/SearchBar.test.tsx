@@ -1,5 +1,5 @@
-import {render, screen, fireEvent, cleanup} from '@testing-library/react';
-import {describe, it, expect, vi, beforeEach} from 'vitest';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import SearchBar from '../SearchBar.tsx';
 
 describe('SearchBar', () => {
@@ -20,7 +20,7 @@ describe('SearchBar', () => {
         const handleValueChange = vi.fn();
         render(<SearchBar value="" onValueChange={handleValueChange} onSearchClick={() => {
         }}/>);
-        fireEvent.change(screen.getByPlaceholderText('Input movie title to search...'), {target: {value: 'Inception'}});
+        fireEvent.change(screen.getByPlaceholderText('Input movie title to search...'), { target: { value: 'Inception' } });
         expect(handleValueChange).toHaveBeenCalled();
     });
 
