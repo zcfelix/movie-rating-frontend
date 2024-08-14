@@ -1,0 +1,7 @@
+- [ ] add loading
+- [ ] component unit tests
+- [ ] pagination logic
+- [ ] movies page
+- [ ] rename Movies
+- [ ] use navigation component
+- [ ] env configuration to set the api base url
