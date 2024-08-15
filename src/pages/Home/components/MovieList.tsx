@@ -4,7 +4,6 @@ import {
   TableCell,
   TableRow,
 } from '../../../components/ui/table';
-import infoSvg from '@/assets/info.svg';
 import MovieDetailDialog from '../../../components/common/MovieDetailDialog.tsx';
 import MovieContext from '../../../context/movies';
 import { useContext } from 'react';
@@ -12,6 +11,7 @@ import MovieImg from '../../../components/common/MovieImg.tsx';
 import ReleaseDate from '../../Movies/components/ReleaseDate.tsx';
 import Runtime from '../../Movies/components/Runtime.tsx';
 import Rating from '../../Movies/components/Rating.tsx';
+import { Info } from 'lucide-react';
 
 const MovieList = () => {
   const { movies } = useContext(MovieContext);
@@ -43,12 +43,12 @@ const MovieList = () => {
             </TableCell>
             <TableCell className="text-right w-[100px]">
               <MovieDetailDialog movie={movie}>
-                <img
-                  src={infoSvg}
-                  alt="Info"
-                  title="View Details"
-                  className="w-[34px] h-[34px] cursor-pointer"
-                />
+                <div className="group relative">
+                  <Info className="text-blue-500 w-[24px] h-[24px] cursor-pointer" />
+                  <span className="absolute left-1/2 transform -translate-x-1/2 bottom-full mb-2 px-2 py-1 text-xs text-white bg-gray-600 rounded opacity-0 group-hover:opacity-100">
+                    View Details
+                  </span>
+                </div>
               </MovieDetailDialog>
             </TableCell>
           </TableRow>
