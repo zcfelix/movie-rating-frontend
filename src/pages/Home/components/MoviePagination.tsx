@@ -100,7 +100,7 @@ const MoviePagination = ({
               <PaginationEllipsis />{' '}
             </PaginationItem>
           ) : (
-            <PaginationItem key={page}>
+            <PaginationItem key={index}>
               <PaginationLink
                 onClick={() => handlePageClick(page)}
                 isActive={page === currentPage}
