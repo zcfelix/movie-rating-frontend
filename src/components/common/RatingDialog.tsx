@@ -12,8 +12,13 @@ import {
 } from '../ui/dialog.tsx';
 import { ratingMovie } from '../../api';
 
-const RatingDialog = ({ movie }: { movie: Movie }) => {
-  const { changeMovies } = useContext(MovieContext);
+interface RatingDialogProps {
+  movie: Movie;
+  onRatingChange?: (movieId: number, averageRating: string) => void;
+}
+
+const RatingDialog = ({ movie, onRatingChange }: RatingDialogProps) => {
+  const { changeMovies } = useContext(MovieContext); // TODO: replace with props
 
   const handleScoreClick = (score: number) => {
     ratingMovie({ movieId: movie.id, score }).then((data) => {
@@ -22,6 +27,9 @@ const RatingDialog = ({ movie }: { movie: Movie }) => {
           ...movie,
           averageRating: data.averageRating,
         });
+      }
+      if (onRatingChange) {
+        onRatingChange(movie.id, data.averageRating);
       }
     });
   };
