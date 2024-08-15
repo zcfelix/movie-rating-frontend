@@ -8,6 +8,8 @@ import {
 import MovieImg from '../../../components/common/MovieImg.tsx';
 import RatingDialog from '../../../components/common/RatingDialog.tsx';
 import MovieGenres from './MovieGenres.tsx';
+import ReleaseDate from './ReleaseDate.tsx';
+import Runtime from './Runtime.tsx';
 
 interface MovieTileProps {
   movie: Movie;
@@ -25,8 +27,10 @@ const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
       </CardTitle>
       <CardContent>
         <MovieGenres genres={movie.genres} />
-        <p>{movie.year}</p>
-        <p>{movie.runtime}</p>
+        <div className="flex justify-center space-x-2">
+          <ReleaseDate releaseYear={movie.year} />
+          <Runtime runtime={movie.runtime} />
+        </div>
         <p>Rate: {movie.averageRating}</p>
         <div className="absolute bottom-0 right-2">
           <RatingDialog movie={movie} onRatingChange={onRatingChange} />
