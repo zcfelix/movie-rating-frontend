@@ -36,6 +36,7 @@ const RatingDialog = ({ movie, onRatingChange }: RatingDialogProps) => {
     });
   };
 
+  // TODO: refactor to 5 stars: 2 scores map to 1 star
   const scoreList = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (

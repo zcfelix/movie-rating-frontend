@@ -1,12 +1,14 @@
 export interface Movie {
   id: number;
   title: string;
+  year: string;
   runtime: number;
   posterUrl: string;
   plot: string;
   director: string;
   actors: string;
   averageRating: string;
+  genres: string[];
 }
 
 export interface FetchMoviesPayload {
