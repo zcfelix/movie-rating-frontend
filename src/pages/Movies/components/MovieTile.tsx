@@ -19,8 +19,10 @@ const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
       <CardHeader>
         <MovieImg url={movie.posterUrl} className="w-full h-[150px]" />
       </CardHeader>
+      <CardTitle className="text-lg font-bold pl-1 pr-1">
+        {movie.title}
+      </CardTitle>
       <CardContent>
-        <CardTitle className="text-md font-bold">{movie.title}</CardTitle>
         <p>Rate: {movie.averageRating}</p>
         <div className="absolute bottom-0 right-2">
           <RatingDialog movie={movie} onRatingChange={onRatingChange} />
