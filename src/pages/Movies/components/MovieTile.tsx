@@ -15,14 +15,16 @@ interface MovieTileProps {
 
 const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
   return (
-    <Card className="w-[200px] h-[300px] m-2 cursor-pointer">
+    <Card className="relative w-[240px] h-[360px] m-2 cursor-pointer">
       <CardHeader>
         <MovieImg url={movie.posterUrl} className="w-full h-[150px]" />
       </CardHeader>
       <CardContent>
         <CardTitle className="text-md font-bold">{movie.title}</CardTitle>
         <p>Rate: {movie.averageRating}</p>
-        <RatingDialog movie={movie} onRatingChange={onRatingChange} />
+        <div className="absolute bottom-0 right-2">
+          <RatingDialog movie={movie} onRatingChange={onRatingChange} />
+        </div>
       </CardContent>
     </Card>
   );

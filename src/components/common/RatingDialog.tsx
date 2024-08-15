@@ -11,6 +11,8 @@ import {
   DialogTrigger,
 } from '../ui/dialog.tsx';
 import { ratingMovie } from '../../api';
+import { Button } from '../ui/button.tsx';
+import { Star } from 'lucide-react';
 
 interface RatingDialogProps {
   movie: Movie;
@@ -38,20 +40,24 @@ const RatingDialog = ({ movie, onRatingChange }: RatingDialogProps) => {
 
   return (
     <Dialog>
-      <DialogTrigger className="text-yellow-400">Rate</DialogTrigger>
+      <DialogTrigger className="text-yellow-400">
+        <Button variant="ghost" size="icon">
+          <Star className="w-6 h-6" />
+        </Button>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Rate</DialogTitle>
           <DialogDescription>
             <DialogClose>
               {scoreList.map((score) => (
-                <div
-                  className="ml-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-                  key={score}
+                <Button
+                  variant="outline"
+                  className="mr-1 w-10 h-10 hover:bg-yellow-400"
                   onClick={() => handleScoreClick(score)}
                 >
                   {score}
-                </div>
+                </Button>
               ))}
             </DialogClose>
           </DialogDescription>
