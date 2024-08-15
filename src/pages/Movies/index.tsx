@@ -9,6 +9,11 @@ import MovieTile from './components/MovieTile.tsx';
 
 const PAGE_SIZE = 20;
 
+enum LOAD_MODE {
+  INIT,
+  LOAD_MORE,
+}
+
 const Movies = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -17,7 +22,7 @@ const Movies = () => {
   const { movies, setMovies } = useContext(MovieContext);
   const handleScrollRef = useRef<() => void>(() => {});
 
-  const loadMoreMovies = (initMovies?: Movie[]) => {
+  const loadMoreMovies = (loadMode: LOAD_MODE = LOAD_MODE.LOAD_MORE) => {
     if (loading) return;
     setLoading(true);
     fetchMovies({
@@ -26,9 +31,12 @@ const Movies = () => {
       searchCriteria: '',
     }).then((data) => {
       setMovies((prevMovies) => {
-        return initMovies
-          ? [...initMovies, ...data.contents]
-          : [...prevMovies, ...data.contents];
+        switch (loadMode) {
+          case LOAD_MODE.INIT:
+            return data.contents;
+          case LOAD_MODE.LOAD_MORE:
+            return [...prevMovies, ...data.contents];
+        }
       });
       setPageNumber(pageNumber + 1);
       setTotalSize(data.totalSize);
@@ -37,7 +45,7 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    loadMoreMovies([]);
+    loadMoreMovies(LOAD_MODE.INIT);
     const handleScroll = () => handleScrollRef.current();
     window.addEventListener('scroll', handleScroll);
 
