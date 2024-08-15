@@ -9,10 +9,9 @@ import {
   DialogTrigger,
 } from '../ui/dialog.tsx';
 import { ratingMovie } from '../../api';
-import { Button } from '../ui/button.tsx';
-import { Star } from 'lucide-react';
 import { useContext } from 'react';
 import MovieContext from '../../context/movies.ts';
+import { Star } from 'lucide-react';
 
 const RatingDialog = ({ movie }: { movie: Movie }) => {
   const { changeMoviesByMerging } = useContext(MovieContext);
@@ -29,9 +28,9 @@ const RatingDialog = ({ movie }: { movie: Movie }) => {
   return (
     <Dialog>
       <DialogTrigger className="text-yellow-400">
-        <Button variant="ghost">
+        <div className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
           <Star className="w-4 h-4" /> <span className="ml-1">Rate</span>
-        </Button>
+        </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -39,14 +38,13 @@ const RatingDialog = ({ movie }: { movie: Movie }) => {
           <DialogDescription>
             <DialogClose>
               {scoreList.map((score, index) => (
-                <Button
+                <div
                   key={index}
-                  variant="outline"
-                  className="mr-1 w-10 h-10 hover:bg-yellow-400"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:text-accent-foreground px-4 py-2 mr-1 w-10 h-10 hover:bg-yellow-400"
                   onClick={() => handleScoreClick(score)}
                 >
                   {score}
-                </Button>
+                </div>
               ))}
             </DialogClose>
           </DialogDescription>
