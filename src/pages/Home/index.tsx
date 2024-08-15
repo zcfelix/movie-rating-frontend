@@ -7,6 +7,7 @@ import { FetchMoviesPayload, Movie } from '../../types/movie';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
 import MoviePagination from './components/MoviePagination.tsx';
+import Loader from '../../components/common/Loader.tsx';
 
 const PAGE_SIZE = 20;
 
@@ -15,14 +16,17 @@ export default function Home() {
   const [pageNumber, setPageNumber] = useState(1);
   const [totalSize, setTotalSize] = useState(0);
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
   const totalPages = Math.ceil(totalSize / PAGE_SIZE);
 
   const getMovies = (payload: FetchMoviesPayload) => {
+    setLoading(true);
     fetchMovies(payload).then((data) => {
       setMovies(data.contents);
       setTotalSize(data.totalSize);
+      setLoading(false);
     });
   };
 
@@ -71,13 +75,19 @@ export default function Home() {
           onValueChange={handleSearchValueChange}
           onSearchClick={handleSearchClick}
         />
-        <MovieList />
-        {totalPages > 1 && (
-          <MoviePagination
-            pageNumber={pageNumber}
-            totalPages={totalPages}
-            onPageNumberChange={handlePageNumberChange}
-          />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <MovieList />
+            {totalPages > 1 && (
+              <MoviePagination
+                pageNumber={pageNumber}
+                totalPages={totalPages}
+                onPageNumberChange={handlePageNumberChange}
+              />
+            )}
+          </>
         )}
       </MovieContext.Provider>
     </div>

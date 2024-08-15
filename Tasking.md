@@ -1,4 +1,4 @@
-- [ ] add loading
+- [x] add loading
 - [ ] component unit tests
 - [ ] pagination logic
 - [ ] movies page
