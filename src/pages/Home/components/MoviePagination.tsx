@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -7,105 +8,112 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '../../../components/ui/pagination';
-import { useState } from 'react';
 
-const DEFAULT_DISPLAY_PAGINATION_ITEMS = [1, 2, 3];
-const DEFAULT_ITEMS_SIZE = 3;
-const MoviePagination = ({
-  pageNumber,
-  totalPages,
-  onPageNumberChange,
-}: {
-  pageNumber: number;
+interface PaginationProps {
   totalPages: number;
-  onPageNumberChange: (value: number) => void;
-}) => {
-  const [displayPaginationItems, setDisplayPaginationItems] = useState(() => {
-    if (totalPages >= DEFAULT_ITEMS_SIZE) {
-      return DEFAULT_DISPLAY_PAGINATION_ITEMS;
-    }
-    return Array.from({ length: totalPages }, (_, i) => i + 1);
-  });
+  currentPage: number;
+  onPageChange: (page: number) => void;
+}
 
-  const lastDisplayPaginationItemIndex = displayPaginationItems.length - 1;
+const DEFAULT_SHOW_PAGES = 5;
+const START_ELLIPSIS_THRESHOLD = 3;
+const END_ELLIPSIS_THRESHOLD = 3;
+const ELLIPSIS_PAGES_RANGE = 1;
+
+const MoviePagination = ({
+  totalPages,
+  currentPage,
+  onPageChange,
+}: PaginationProps) => {
+  const [pages, setPages] = useState<number[]>([]);
+
+  useEffect(() => {
+    const generatePages = () => {
+      const pageNumbers = [];
+      if (totalPages <= DEFAULT_SHOW_PAGES) {
+        for (let i = 1; i <= totalPages; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        if (currentPage <= START_ELLIPSIS_THRESHOLD) {
+          for (let i = 1; i <= DEFAULT_SHOW_PAGES - 2; i++) {
+            pageNumbers.push(i);
+          }
+          pageNumbers.push(-1); // Ellipsis
+          pageNumbers.push(totalPages);
+        } else if (currentPage > totalPages - END_ELLIPSIS_THRESHOLD) {
+          pageNumbers.push(1);
+          pageNumbers.push(-1); // Ellipsis
+          for (
+            let i = totalPages - (DEFAULT_SHOW_PAGES - 2);
+            i <= totalPages;
+            i++
+          ) {
+            pageNumbers.push(i);
+          }
+        } else {
+          pageNumbers.push(1);
+          pageNumbers.push(-1); // Ellipsis
+          for (
+            let i = currentPage - ELLIPSIS_PAGES_RANGE;
+            i <= currentPage + ELLIPSIS_PAGES_RANGE;
+            i++
+          ) {
+            pageNumbers.push(i);
+          }
+          pageNumbers.push(-1); // Ellipsis
+          pageNumbers.push(totalPages);
+        }
+      }
+      setPages(pageNumbers);
+    };
+    generatePages();
+  }, [totalPages, currentPage]);
+
+  const handlePageClick = (page: number) => {
+    if (page !== currentPage) {
+      onPageChange(page);
+    }
+  };
 
   const handleNextClick = () => {
-    if (pageNumber === totalPages) {
-      return;
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
     }
-    const nextPageNumber = pageNumber + 1;
-    onPageNumberChange(nextPageNumber);
-    updateDisplayPaginationItems(nextPageNumber);
   };
 
   const handlePreviousClick = () => {
-    if (pageNumber === 1) {
-      return;
-    }
-    const previousPageNumber = pageNumber - 1;
-    onPageNumberChange(previousPageNumber);
-
-    if (displayPaginationItems[0] > previousPageNumber) {
-      setDisplayPaginationItems([
-        previousPageNumber,
-        previousPageNumber + 1,
-        previousPageNumber + 2,
-      ]);
-    }
-  };
-
-  const handlePageNumberClick = (value: number) => {
-    onPageNumberChange(value);
-    if (value === displayPaginationItems[lastDisplayPaginationItemIndex]) {
-      updateDisplayPaginationItems(value);
-    }
-  };
-
-  const updateDisplayPaginationItems = (value: number) => {
-    const remainingPages = totalPages - value;
-    if (remainingPages > 0) {
-      setDisplayPaginationItems(
-        remainingPages == 1
-          ? [value, value + 1]
-          : [value, value + 1, value + 2],
-      );
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
     }
   };
 
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem
-          className="cursor-pointer"
-          onClick={handlePreviousClick}
-        >
-          <PaginationPrevious />
+        <PaginationItem>
+          <PaginationPrevious onClick={handlePreviousClick} size="default" />
         </PaginationItem>
-        {displayPaginationItems[0] !== 1 && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
-        {displayPaginationItems.map((pageIndex) => (
-          <PaginationItem
-            key={pageIndex}
-            className="cursor-pointer"
-            onClick={() => handlePageNumberClick(pageIndex)}
-          >
-            <PaginationLink isActive={pageIndex === pageNumber}>
-              {pageIndex}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
-        {totalPages > DEFAULT_DISPLAY_PAGINATION_ITEMS.length &&
-          displayPaginationItems[lastDisplayPaginationItemIndex] !==
-            totalPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
+        {pages.map((page, index) =>
+          page === -1 ? (
+            <PaginationItem key={index}>
+              <PaginationEllipsis />{' '}
             </PaginationItem>
-          )}
-        <PaginationItem className="cursor-pointer" onClick={handleNextClick}>
-          <PaginationNext />
+          ) : (
+            <PaginationItem key={page}>
+              <PaginationLink
+                onClick={() => handlePageClick(page)}
+                isActive={page === currentPage}
+                size="icon"
+                className="cursor-pointer"
+              >
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          ),
+        )}
+        <PaginationItem>
+          <PaginationNext onClick={handleNextClick} size="default" />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

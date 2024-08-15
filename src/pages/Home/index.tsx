@@ -6,8 +6,8 @@ import MovieList from './components/MovieList.tsx';
 import { FetchMoviesPayload, Movie } from '../../types/movie';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
-import MoviePagination from './components/MoviePagination.tsx';
 import Loader from '../../components/common/Loader.tsx';
+import MoviePagination from './components/MoviePagination.tsx';
 
 const PAGE_SIZE = 20;
 
@@ -82,9 +82,9 @@ export default function Home() {
             <MovieList />
             {totalPages > 1 && (
               <MoviePagination
-                pageNumber={pageNumber}
-                totalPages={totalPages}
-                onPageNumberChange={handlePageNumberChange}
+                totalPages={Math.ceil(totalSize / PAGE_SIZE)}
+                currentPage={pageNumber}
+                onPageChange={handlePageNumberChange}
               />
             )}
           </>
