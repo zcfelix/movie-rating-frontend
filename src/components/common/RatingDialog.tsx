@@ -1,6 +1,4 @@
 import { Movie } from '../../types/movie.ts';
-import MovieContext from '../../context/movies.ts';
-import { useContext } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -13,26 +11,15 @@ import {
 import { ratingMovie } from '../../api';
 import { Button } from '../ui/button.tsx';
 import { Star } from 'lucide-react';
+import { useContext } from 'react';
+import MovieContext from '../../context/movies.ts';
 
-interface RatingDialogProps {
-  movie: Movie;
-  onRatingChange?: (movieId: number, averageRating: string) => void;
-}
-
-const RatingDialog = ({ movie, onRatingChange }: RatingDialogProps) => {
-  const { changeMovies } = useContext(MovieContext); // TODO: replace with props
+const RatingDialog = ({ movie }: { movie: Movie }) => {
+  const { changeMoviesByMerging } = useContext(MovieContext);
 
   const handleScoreClick = (score: number) => {
     ratingMovie({ movieId: movie.id, score }).then((data) => {
-      if (changeMovies) {
-        changeMovies({
-          ...movie,
-          averageRating: data.averageRating,
-        });
-      }
-      if (onRatingChange) {
-        onRatingChange(movie.id, data.averageRating);
-      }
+      changeMoviesByMerging({ ...movie, averageRating: data.averageRating });
     });
   };
 
@@ -51,8 +38,9 @@ const RatingDialog = ({ movie, onRatingChange }: RatingDialogProps) => {
           <DialogTitle>Rate</DialogTitle>
           <DialogDescription>
             <DialogClose>
-              {scoreList.map((score) => (
+              {scoreList.map((score, index) => (
                 <Button
+                  key={index}
                   variant="outline"
                   className="mr-1 w-10 h-10 hover:bg-yellow-400"
                   onClick={() => handleScoreClick(score)}

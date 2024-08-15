@@ -1,6 +1,6 @@
 - [x] add loading
 - [x] dynamic loading in movies list page
-- [ ] refactor RatingDialog component
+- [x] refactor RatingDialog component
 - [ ] component unit tests
 - [x] pagination logic
 - [x] movies page

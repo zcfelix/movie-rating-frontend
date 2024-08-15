@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Movie } from '../../types/movie';
 import { fetchMovies } from '../../api';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
 import MovieTile from './components/MovieTile.tsx';
 import Loader from '../../components/common/Loader.tsx';
+import MovieContext from '../../context/movies.ts';
 
 const PAGE_SIZE = 20;
 
 const Movies = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const { movies, setMovies } = useContext(MovieContext);
 
   const loadMoreMovies = () => {
     if (loading) return;
@@ -22,7 +23,7 @@ const Movies = () => {
       pageSize: PAGE_SIZE,
       searchCriteria: '',
     }).then((data) => {
-      setMovies((prevMovies) => [...prevMovies, ...data.contents]);
+      setMovies([...movies, ...data.contents]);
       setPageNumber((prevPageNumber) => prevPageNumber + 1);
       setLoading(false);
     });
@@ -47,23 +48,12 @@ const Movies = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading]);
 
-  const handleRatingChange = (movieId: number, averageRating: string) => {
-    const currentMovies = movies.map((movie: Movie) => {
-      return movie.id === movieId ? { ...movie, averageRating } : movie;
-    });
-    setMovies(currentMovies);
-  };
-
   return (
     <div>
       <Navigates currentNav={location.pathname} />
       <div className="flex flex-wrap gap-6 justify-center">
         {movies.map((movie: Movie) => (
-          <MovieTile
-            key={movie.id}
-            movie={movie}
-            onRatingChange={handleRatingChange}
-          />
+          <MovieTile key={movie.id} movie={movie} />
         ))}
       </div>
       {loading && <Loader />}

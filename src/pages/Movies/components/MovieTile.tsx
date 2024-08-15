@@ -12,12 +12,7 @@ import Runtime from './Runtime.tsx';
 import AverageRating from './AverageRating.tsx';
 import MoviePoster from './MoviePoster.tsx';
 
-interface MovieTileProps {
-  movie: Movie;
-  onRatingChange: (movieId: number, averageRating: string) => void;
-}
-
-const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
+const MovieTile = ({ movie }: { movie: Movie }) => {
   return (
     <Card className="relative w-[240px] h-[360px] m-2">
       <CardHeader>
@@ -34,7 +29,7 @@ const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
         </div>
         <AverageRating rating={movie.averageRating} />
         <div className="absolute bottom-2 right-2">
-          <RatingDialog movie={movie} onRatingChange={onRatingChange} />
+          <RatingDialog movie={movie} />
         </div>
       </CardContent>
     </Card>

@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SearchBar from './components/SearchBar';
 import { fetchMovies } from '../../api';
-import MovieContext from '../../context/movies';
 import MovieList from './components/MovieList.tsx';
-import { FetchMoviesPayload, Movie } from '../../types/movie';
+import { FetchMoviesPayload } from '../../types/movie';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
 import Loader from '../../components/common/Loader.tsx';
 import MoviePagination from './components/MoviePagination.tsx';
+import MovieContext from '../../context/movies.ts';
 
 const PAGE_SIZE = 20;
 
@@ -15,9 +15,9 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
   const [totalSize, setTotalSize] = useState(0);
-  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const { setMovies } = useContext(MovieContext);
 
   const totalPages = Math.ceil(totalSize / PAGE_SIZE);
 
@@ -46,13 +46,6 @@ export default function Home() {
     });
   };
 
-  const changeMovies = (currentMovie: Movie) => {
-    const currentMovies = movies.map((movie: Movie) => {
-      return movie.id === currentMovie.id ? currentMovie : movie;
-    });
-    setMovies(currentMovies);
-  };
-
   const handleSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
@@ -69,27 +62,25 @@ export default function Home() {
   return (
     <div>
       <Navigates currentNav={location.pathname} />
-      <MovieContext.Provider value={{ movies, changeMovies }}>
-        <SearchBar
-          value={searchValue}
-          onValueChange={handleSearchValueChange}
-          onSearchClick={handleSearchClick}
-        />
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            <MovieList />
-            {totalPages > 1 && (
-              <MoviePagination
-                totalPages={Math.ceil(totalSize / PAGE_SIZE)}
-                currentPage={pageNumber}
-                onPageChange={handlePageNumberChange}
-              />
-            )}
-          </>
-        )}
-      </MovieContext.Provider>
+      <SearchBar
+        value={searchValue}
+        onValueChange={handleSearchValueChange}
+        onSearchClick={handleSearchClick}
+      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <MovieList />
+          {totalPages > 1 && (
+            <MoviePagination
+              totalPages={Math.ceil(totalSize / PAGE_SIZE)}
+              currentPage={pageNumber}
+              onPageChange={handlePageNumberChange}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }

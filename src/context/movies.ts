@@ -3,10 +3,14 @@ import { Movie } from '../types/movie';
 
 interface MovieContextProps {
   movies: Movie[];
-  changeMovies?: (movie: Movie) => void;
+  setMovies: (movies: Movie[]) => void;
+  changeMoviesByMerging: (updatedMovie: Movie) => void;
 }
 
 const MovieContext = createContext<MovieContextProps>({
   movies: [],
+  setMovies: () => {},
+  changeMoviesByMerging: () => {},
 });
+
 export default MovieContext;
