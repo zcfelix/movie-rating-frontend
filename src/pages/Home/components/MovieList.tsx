@@ -10,7 +10,7 @@ import MovieContext from '../../../context/movies';
 import { useContext } from 'react';
 import MovieImg from '../../../components/common/MovieImg.tsx';
 
-const Movies = () => {
+const MovieList = () => {
   const { movies } = useContext(MovieContext);
   return (
     <Table className="my-6">
@@ -41,4 +41,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MovieList;

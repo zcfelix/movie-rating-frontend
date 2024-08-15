@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchBar from './components/SearchBar';
 import { fetchMovies } from '../../api';
 import MovieContext from '../../context/movies';
-import Movies from './components/Movies';
+import MovieList from './components/MovieList.tsx';
 import { FetchMoviesPayload, Movie } from '../../types/movie';
 import Navigates from '../../components/common/Navigates.tsx';
 import { useLocation } from 'react-router-dom';
@@ -71,7 +71,7 @@ export default function Home() {
           onValueChange={handleSearchValueChange}
           onSearchClick={handleSearchClick}
         />
-        <Movies />
+        <MovieList />
         {totalPages > 1 && (
           <MoviePagination
             pageNumber={pageNumber}
