@@ -40,7 +40,7 @@ export default function Home() {
 
   const handleSearchClick = () => {
     getMovies({
-      pageNumber: pageNumber,
+      pageNumber: 1,
       pageSize: PAGE_SIZE,
       searchCriteria: searchValue,
     });

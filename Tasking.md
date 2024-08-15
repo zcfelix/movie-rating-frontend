@@ -2,7 +2,7 @@
 - [x] dynamic loading in movies list page
 - [ ] refactor RatingDialog component
 - [ ] component unit tests
-- [ ] pagination logic
+- [x] pagination logic
 - [x] movies page
 - [x] rename Movies
 - [ ] use navigation component
