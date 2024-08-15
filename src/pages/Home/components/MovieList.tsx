@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import MovieImg from '../../../components/common/MovieImg.tsx';
 import ReleaseDate from '../../Movies/components/ReleaseDate.tsx';
 import Runtime from '../../Movies/components/Runtime.tsx';
-import Rating from '../../Movies/components/Rating.tsx';
+import AverageRating from '../../Movies/components/AverageRating.tsx';
 import { Info } from 'lucide-react';
 
 const MovieList = () => {
@@ -30,7 +30,7 @@ const MovieList = () => {
               <div className="flex flex-row space-x-4 mt-0.5">
                 <ReleaseDate releaseYear={movie.year} />
                 <Runtime runtime={movie.runtime} />
-                <Rating rating={movie.averageRating} />
+                <AverageRating rating={movie.averageRating} />
               </div>
               <p className="mt-0.5">
                 <span className="font-bold text-sm mr-2">Director</span>

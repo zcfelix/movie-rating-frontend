@@ -10,7 +10,7 @@ import { Movie } from '../../types/movie.ts';
 import MovieImg from './MovieImg.tsx';
 import ReleaseDate from '../../pages/Movies/components/ReleaseDate.tsx';
 import Runtime from '../../pages/Movies/components/Runtime.tsx';
-import Rating from '../../pages/Movies/components/Rating.tsx';
+import AverageRating from '../../pages/Movies/components/AverageRating.tsx';
 import RatingDialog from './RatingDialog.tsx';
 
 const MovieDetailDialog = ({
@@ -34,7 +34,7 @@ const MovieDetailDialog = ({
                 <Runtime runtime={movie.runtime} />
               </div>
               <div className="flex flex-row gap-4">
-                <Rating rating={movie.averageRating} />
+                <AverageRating rating={movie.averageRating} />
                 <RatingDialog movie={movie} />
               </div>
             </div>

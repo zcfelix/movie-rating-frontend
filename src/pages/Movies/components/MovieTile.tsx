@@ -10,7 +10,7 @@ import RatingDialog from '../../../components/common/RatingDialog.tsx';
 import MovieGenres from './MovieGenres.tsx';
 import ReleaseDate from './ReleaseDate.tsx';
 import Runtime from './Runtime.tsx';
-import Rating from './Rating.tsx';
+import AverageRating from './AverageRating.tsx';
 
 interface MovieTileProps {
   movie: Movie;
@@ -32,7 +32,7 @@ const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
           <ReleaseDate releaseYear={movie.year} />
           <Runtime runtime={movie.runtime} />
         </div>
-        <Rating rating={movie.averageRating} />
+        <AverageRating rating={movie.averageRating} />
         <div className="absolute bottom-2 right-2">
           <RatingDialog movie={movie} onRatingChange={onRatingChange} />
         </div>

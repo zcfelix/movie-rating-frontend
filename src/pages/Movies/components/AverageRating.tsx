@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react';
 
-const Rating = ({ rating }: { rating: string }) => {
+const AverageRating = ({ rating }: { rating: string }) => {
   return (
     <div className="flex justify-center items-center space-x-1">
       <Star className="w-4 h-4 text-yellow-400 fill-current" />
@@ -9,4 +9,4 @@ const Rating = ({ rating }: { rating: string }) => {
   );
 };
 
-export default Rating;
+export default AverageRating;
