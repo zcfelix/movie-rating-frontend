@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+Table of Contents
+=================
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+* [Introduction](#introduction)
+* [General instruction](#general-instruction)
+* [Design](#design)
 
-Currently, two official plugins are available:
+## Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a simple React app to display a list of movies and movie
+details.
+It uses
+the [Movie backend API](https://github.com/zcfelix/moving-rating-backend)
+to fetch the data.
 
-## Expanding the ESLint configuration
+The app is built
+with [React](https://react.dev/), [Shadcn](https://ui.shadcn.com/),
+and [Tailwind CSS](https://tailwindcss.com/).
+The app consists of two main pages:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Home Page: Displays a list of movies with a rating and a
+  button to view the movie details.
+  It supports pagination and search.
+- Movie List Page: Display a tile view of movies,
+  each tile has a button to rate the movie.
+  It supports dynamic loading of movies.
 
-- Configure the top-level `parserOptions` property like this:
+## General instruction
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+- Clone the repository
+
+```shell
+git clone https://github.com/zcfelix/movie-rating-frontend.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Install the dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+```shell
+npm install
 ```
+
+- Build the app
+
+```shell
+npm run build
+```
+
+- Run tests
+
+```shell
+npm run test
+```
+
+***To run this app, you need to start the backend server first.
+Please follow the instruction
+*** [here](https://github.com/zcfelix/moving-rating-backend/blob/main/README.md).
+
+- Start the frontend server
+
+```shell
+npm run dev
+```
+
+- Open the browser and navigate to `http://localhost:5173` to view the app.
+
+## Design
+
+- Using vite to build the project, it's faster than webpack. The hot loading is
+  also faster.
+- Using shadcn as the UI library, it's a simple and easy-to-use UI library.
+- Using tailwindcss to style the project, it's a utility-first CSS framework.
+- Using context to manage the global state, it's a simple way to manage the
+  global state for a simple app.
+- Using axios to fetch the data.
