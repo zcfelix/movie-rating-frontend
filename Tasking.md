@@ -1,7 +1,9 @@
 - [x] add loading
+- [x] dynamic loading in movies list page
+- [ ] refactor RatingDialog component
 - [ ] component unit tests
 - [ ] pagination logic
-- [ ] movies page
-- [ ] rename Movies
+- [x] movies page
+- [x] rename Movies
 - [ ] use navigation component
 - [ ] env configuration to set the api base url
