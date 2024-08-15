@@ -5,12 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from '../../../components/ui/card.tsx';
-import MovieImg from '../../../components/common/MovieImg.tsx';
 import RatingDialog from '../../../components/common/RatingDialog.tsx';
 import MovieGenres from './MovieGenres.tsx';
 import ReleaseDate from './ReleaseDate.tsx';
 import Runtime from './Runtime.tsx';
 import AverageRating from './AverageRating.tsx';
+import MoviePoster from './MoviePoster.tsx';
 
 interface MovieTileProps {
   movie: Movie;
@@ -21,7 +21,7 @@ const MovieTile = ({ movie, onRatingChange }: MovieTileProps) => {
   return (
     <Card className="relative w-[240px] h-[360px] m-2">
       <CardHeader>
-        <MovieImg url={movie.posterUrl} className="w-full h-[150px]" />
+        <MoviePoster url={movie.posterUrl} />
       </CardHeader>
       <CardTitle className="text-xl font-bold pl-1 pr-1">
         {movie.title}
