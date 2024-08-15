@@ -1,16 +1,16 @@
-import { Movie } from '../../../types/movie.ts';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '../../../components/ui/card.tsx';
-import RatingDialog from '../../../components/common/RatingDialog.tsx';
+import { Movie } from '../../../types/movie.ts';
+import MoviePoster from './MoviePoster.tsx';
 import MovieGenres from './MovieGenres.tsx';
 import ReleaseDate from './ReleaseDate.tsx';
 import Runtime from './Runtime.tsx';
 import AverageRating from './AverageRating.tsx';
-import MoviePoster from './MoviePoster.tsx';
+import RatingDialog from '../../../components/common/RatingDialog.tsx';
 
 const MovieTile = ({ movie }: { movie: Movie }) => {
   return (

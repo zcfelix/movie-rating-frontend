@@ -36,6 +36,7 @@ export default function Home() {
       pageSize: PAGE_SIZE,
       searchCriteria: searchValue,
     });
+    return () => setMovies([]);
   }, []);
 
   const handleSearchClick = () => {

@@ -3,7 +3,7 @@ import { Movie } from '../types/movie';
 
 interface MovieContextProps {
   movies: Movie[];
-  setMovies: (movies: Movie[]) => void;
+  setMovies: (newMovies: Movie[] | ((prevState: Movie[]) => Movie[])) => void;
   changeMoviesByMerging: (updatedMovie: Movie) => void;
 }
 

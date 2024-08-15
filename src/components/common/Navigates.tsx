@@ -9,7 +9,9 @@ const Navigates = ({ currentNav }: { currentNav: string }) => {
   ];
 
   const handleNavClick = (path: string) => {
-    navigate(path);
+    if (currentNav !== path) {
+      navigate(path);
+    }
   };
 
   return (
