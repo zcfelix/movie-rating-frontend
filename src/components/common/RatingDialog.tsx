@@ -42,8 +42,8 @@ const RatingDialog = ({ movie, onRatingChange }: RatingDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger className="text-yellow-400">
-        <Button variant="ghost" size="icon">
-          <Star className="w-6 h-6" />
+        <Button variant="ghost">
+          <Star className="w-4 h-4" /> <span className="ml-1">Rate</span>
         </Button>
       </DialogTrigger>
       <DialogContent>
